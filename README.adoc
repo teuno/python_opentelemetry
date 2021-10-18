@@ -1,0 +1,28 @@
+:source-highlighter: rouge
+
+# Open telemetry with python example
+
+This is a quick and dirty example to show how to use a few of the python open telemetry packages and how you can use them.
+
+There is 1 main API that calls the other 2 api's and does 2 random requests to web pages (google.com and example.com).
+One of the API's uses SQLalchemy to list 3 row in the postgres docker container.
+The other API uses boto3 to call to AWS to list the files in a bucket.
+
+## Getting started
+
+to start the application with a call to list the contents of an S3 bucket you have to add a .env file on the same directory level as the docker-compose file with the following values:
+
+- AWS_ACCESS_KEY=your_key
+- AWS_SECRET_KEY=your_secret
+
+After this you can start the application with the following command:
+
+[source,bash]
+----
+docker-compose --env-file .env up --build
+----
+
+## TODO:
+- Add Otel collector and send traces to there.
+- Change to Open telemetry instead of zipkin
+- Add collector for logs and send them to the Otel collector.

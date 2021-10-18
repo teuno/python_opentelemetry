@@ -1,0 +1,12 @@
+flask
+requests
+
+gunicorn==20.1.0
+
+opentelemetry-sdk
+opentelemetry-instrumentation
+opentelemetry-propagator-b3
+opentelemetry.exporter.zipkin
+opentelemetry-instrumentation-flask
+opentelemetry-instrumentation-requests
+opentelemetry-instrumentation-logging

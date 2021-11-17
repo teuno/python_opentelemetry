@@ -8,7 +8,11 @@ The app1 calls the other 2 api's and does 2 random requests to web pages (google
 app2 uses SQLalchemy to list 3 row in the postgres docker container.
 app3 uses boto3 to call to AWS to list the files in a bucket.
 
-The tracing of app1 is send via the otlp protocol to a otlp-collecter. app2 and app3 use the zipkin protocol to send it the the same collector.
+The tracing of app1 is send via the otlp protocol to a otlp-collector. app2 and app3 use the zipkin protocol to send it the the same collector.
+
+Prometheus is being used to scrape the otlp-collector for it's own metrics and app1 for the prometheus metrics from that app. When trying to scrape the application metrics from the otlp-collector we see an conversion can not be made error.
+
+image::images/otel_example.png[]
 
 ## Getting started
 

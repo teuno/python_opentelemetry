@@ -1,5 +1,8 @@
 #https://opentelemetry.io/docs/collector/configuration/#receivers
 receivers:
+#  not working yet
+#  fluentforward:
+#    endpoint: 0.0.0.0:8006
   zipkin:
   otlp:
     protocols:
@@ -47,3 +50,7 @@ service:
       receivers: [otlp, prometheus]
       processors: [batch]
       exporters: [logging, prometheus]
+#    logs:
+#      receivers: [ fluentforward ]
+#      processors: [ batch ]
+#      exporters: [ logging ]

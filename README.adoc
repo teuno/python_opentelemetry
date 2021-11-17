@@ -4,9 +4,11 @@
 
 This is a quick and dirty example to show how to use a few of the python open telemetry packages and how you can use them.
 
-There is 1 main API that calls the other 2 api's and does 2 random requests to web pages (google.com and example.com).
-One of the API's uses SQLalchemy to list 3 row in the postgres docker container.
-The other API uses boto3 to call to AWS to list the files in a bucket.
+The app1 calls the other 2 api's and does 2 random requests to web pages (google.com and example.com).
+app2 uses SQLalchemy to list 3 row in the postgres docker container.
+app3 uses boto3 to call to AWS to list the files in a bucket.
+
+The tracing of app1 is send via the otlp protocol to a otlp-collecter. app2 and app3 use the zipkin protocol to send it the the same collector.
 
 ## Getting started
 
@@ -23,5 +25,4 @@ docker-compose --env-file .env up --build
 ----
 
 ## TODO:
-- Change to Open telemetry instead of zipkin
 - Add collector for logs and send them to the Otel collector.

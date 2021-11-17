@@ -1,5 +1,5 @@
 from opentelemetry import trace
-from opentelemetry.exporter.zipkin.proto.http import ZipkinExporter
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 from opentelemetry.propagate import set_global_textmap
 from opentelemetry.propagators.b3 import B3MultiFormat
 
@@ -36,12 +36,10 @@ def post_fork(server, worker):
         )
     )
 
-    zipkin_exporter = ZipkinExporter(
-        endpoint="http://otel-collector:9411",
-    )
+    otlp_exporter = OTLPSpanExporter(endpoint="http://otel-collector:4317", insecure=True)
 
     trace.get_tracer_provider().add_span_processor(
-        BatchSpanProcessor(zipkin_exporter)
+        BatchSpanProcessor(otlp_exporter)
     )
 
     set_global_textmap(B3MultiFormat())

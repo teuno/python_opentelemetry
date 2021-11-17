@@ -37,7 +37,7 @@ def post_fork(server, worker):
     )
 
     zipkin_exporter = ZipkinExporter(
-        endpoint="http://zipkin:9411/api/v2/spans",
+        endpoint="http://otel-collector:9411",
     )
 
     trace.get_tracer_provider().add_span_processor(

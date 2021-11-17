@@ -23,6 +23,5 @@ docker-compose --env-file .env up --build
 ----
 
 ## TODO:
-- Add Otel collector and send traces to there.
 - Change to Open telemetry instead of zipkin
 - Add collector for logs and send them to the Otel collector.

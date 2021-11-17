@@ -1,0 +1,47 @@
+receivers:
+  zipkin:
+  otlp:
+    protocols:
+      grpc:
+#  prometheus:
+#    config:
+#      scrape_configs:
+#        - job_name: 'springapp'
+#          metrics_path: '/actuator/prometheus'
+#          scrape_interval: 10s
+#          static_configs:
+#            - targets: [ 'http://0.0.0.0:8080' ]
+
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    namespace: promexample
+    const_labels:
+      label1: value1
+  logging:
+
+  zipkin:
+    endpoint: "http://zipkin:9411/api/v2/spans"
+    format: proto
+
+processors:
+  batch:
+#    send_batch_max_size: 0 #default
+#    send_batch_size: 8192 #default
+#    timeout: 200ms #default
+
+
+extensions:
+  health_check:
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [otlp, zipkin]
+      processors: [batch]
+      exporters: [logging, zipkin]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, prometheus]

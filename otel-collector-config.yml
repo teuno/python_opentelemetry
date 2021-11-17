@@ -1,3 +1,4 @@
+#https://opentelemetry.io/docs/collector/configuration/#receivers
 receivers:
   zipkin:
   otlp:
@@ -12,6 +13,7 @@ receivers:
 #          static_configs:
 #            - targets: [ 'http://0.0.0.0:8080' ]
 
+#https://opentelemetry.io/docs/collector/configuration/#exporters
 exporters:
   prometheus:
     endpoint: "0.0.0.0:8889"
@@ -24,16 +26,18 @@ exporters:
     endpoint: "http://zipkin:9411/api/v2/spans"
     format: proto
 
+#https://opentelemetry.io/docs/collector/configuration/#processors
 processors:
   batch:
 #    send_batch_max_size: 0 #default
 #    send_batch_size: 8192 #default
 #    timeout: 200ms #default
 
-
+#https://opentelemetry.io/docs/collector/configuration/#extensions
 extensions:
   health_check:
 
+#https://opentelemetry.io/docs/collector/configuration/#service
 service:
   extensions: [health_check]
   pipelines:

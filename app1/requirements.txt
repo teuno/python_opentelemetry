@@ -3,6 +3,8 @@ requests
 
 gunicorn==20.1.0
 
+prometheus-flask-exporter
+
 opentelemetry-sdk
 opentelemetry-instrumentation
 opentelemetry-propagator-b3

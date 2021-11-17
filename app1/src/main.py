@@ -2,6 +2,7 @@ import logging
 
 import requests
 from flask import Flask
+from prometheus_flask_exporter import PrometheusMetrics
 from opentelemetry import trace
 
 from open_telemetry import add_instumentation
@@ -12,6 +13,8 @@ tracer = trace.get_tracer(__name__)
 
 def create_app():
     app = Flask(__name__)
+    metrics = PrometheusMetrics.for_app_factory()
+    metrics.init_app(app)
     add_instumentation(app)
 
     @app.route("/")
